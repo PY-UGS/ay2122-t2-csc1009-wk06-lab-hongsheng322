@@ -14,10 +14,12 @@ class Lab06 {
         ll.add(15);
 
         //Question 1
+        System.out.println("Question 1");
         addAndSort(ll, 14);
   
 
         //Question 2
+        System.out.println("Question 2");
         System.out.println("Linked List Before Swapping :-");
   
         for (int i : ll) {
@@ -38,9 +40,11 @@ class Lab06 {
         System.out.println();
 
         // Question 3
+        System.out.println("Question 3");
         System.out.println(findValue(1000, 9999, 500));
 
         // Question 4
+        System.out.println("Question 4");
         Hashtable<Integer, Integer> hm = new Hashtable<>();
         hm.put(1, 10);
         hm.put(2, 11);
@@ -48,6 +52,16 @@ class Lab06 {
         hm.put(4, 14);
         hm.put(5, 15);
         hashAndSort(hm, 12);
+
+        // Question 5
+        System.out.println("Question 5");
+        System.out.println(hm);
+        hashAndSwap(hm, 2, 3);
+        System.out.println(hm);
+
+        // Question 6
+        System.out.println("Question 6");
+        System.out.println(findValueHash(1000, 9999, 500));
     }
 
     // Question 1
@@ -108,7 +122,7 @@ class Lab06 {
         return -1;
     }
 
-    // Question 4 - Not a good idea, A map is not meant to be sorted, but accessed fast. To sort the map, We have to create a list to sort it then put it back to the hashmap.
+    // Question 4 - Not a good idea, A map is not meant to be sorted, but accessed fast. To sort the map, We have to create a list to sort it then put it back to the hashmap. 
     public static void hashAndSort(Hashtable<Integer, Integer> hashmap, int value){
         System.out.println(hashmap);
         hashmap.put(hashmap.size()+1, value);
@@ -129,5 +143,36 @@ class Lab06 {
             temp.put(aa.getKey(), aa.getValue());
         }
         System.out.println(hashmap);
+    }
+
+    //Question 5 - using index to sort the value
+    public static void hashAndSwap(Hashtable<Integer, Integer> hm, int indexOne, int indexTwo){
+        int temp1 = hm.get(indexOne);
+        int temp2 = hm.get(indexTwo);
+        // Swapping the elements
+        hm.put(indexOne, temp2);
+        hm.put(indexTwo, temp1);
+    }
+
+    //Question 6
+    public static int findValueHash(int min, int max, int amount){
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (int i=0; i < amount; i++){   
+            Random r = new Random();
+            temp.put(i, r.nextInt((max - min) + 1) + min); 
+        }
+
+        //new random variable
+        Random r = new Random();
+        int var = r.nextInt((max - min) + 1) + min;
+
+        Set<Integer> keys = temp.keySet();
+        for (Integer key: keys){
+            if (var == temp.get(key)){ 
+                return key;
+            }
+        }
+
+        return -1;
     }
 }
