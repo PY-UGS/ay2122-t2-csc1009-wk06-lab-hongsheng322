@@ -15,7 +15,7 @@ class Lab06 {
 
         //Question 1
         System.out.println("Question 1");
-        addAndSort(ll, 14);
+        addAndSort(ll, 12);
   
 
         //Question 2
@@ -28,7 +28,7 @@ class Lab06 {
         System.out.println();
 
         // Swapping the elements
-        // swapValues(ll, 11, 14);
+        swapValues(ll, 11, 14);
         System.out.println();
   
         System.out.println("Linked List After Swapping :-");
@@ -45,7 +45,7 @@ class Lab06 {
 
         // Question 4
         System.out.println("Question 4");
-        Hashtable<Integer, Integer> hm = new Hashtable<>();
+        HashMap<Integer, Integer> hm = new HashMap<>();
         hm.put(1, 10);
         hm.put(2, 11);
         hm.put(3, 13);
@@ -122,31 +122,32 @@ class Lab06 {
         return -1;
     }
 
-    // Question 4 - Not a good idea, A map is not meant to be sorted, but accessed fast. To sort the map, We have to create a list to sort it then put it back to the hashmap. 
-    public static void hashAndSort(Hashtable<Integer, Integer> hashmap, int value){
-        System.out.println(hashmap);
+    // Question 4 A TreeMap is always sorted by the keys. To sort by values, you have to extract them into a List and sort.
+    public static void hashAndSort(HashMap<Integer, Integer> hashmap, int value){
         hashmap.put(hashmap.size()+1, value);
+        System.out.println(hashmap);
 
         // Create a list from elements of HashMap
         List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hashmap.entrySet());
  
         // Sort the list
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() 
+        {public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)
             {
                 return (o1.getValue()).compareTo(o2.getValue());
             }
         });
          
         // put data from sorted list to hashmap
-        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        hashmap = new LinkedHashMap<Integer, Integer>();
         for (Map.Entry<Integer, Integer> aa : list) {
-            temp.put(aa.getKey(), aa.getValue());
+            hashmap.put(aa.getKey(), aa.getValue());
         }
         System.out.println(hashmap);
     }
 
-    //Question 5 - using index to sort the value
-    public static void hashAndSwap(Hashtable<Integer, Integer> hm, int indexOne, int indexTwo){
+    //Question 5
+    public static void hashAndSwap(HashMap<Integer, Integer> hm, int indexOne, int indexTwo){
         int temp1 = hm.get(indexOne);
         int temp2 = hm.get(indexTwo);
         // Swapping the elements
